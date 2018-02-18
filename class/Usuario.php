@@ -110,6 +110,17 @@ class Usuario
         ));
     }
 
+    public function delete() {
+        $sql = new Sql();
+        $sql->query("DELETE FROM tb_usuarios WHERE idusuario = :ID", array(
+            ':ID'=>$this->getIdusuario()
+        ));
+        $this->setIdusuario(0);
+        $this->setDessenha('');
+        $this->setDeslogin('');
+        $this->setDtcadastro(new DateTime());
+    }
+
     public static function allUsers() {
         $sql = new Sql();
         return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin;");
